@@ -78,6 +78,8 @@ def evaluate_model(model, evaluation_data, groundtruth_data):
 
     # plot
     plt.plot(evaluation_data, groundtruth_data, 'bs', evaluation_data, predicted_data, 'rs')
+    plt.xlabel('Cassification Results')
+    plt.savefig('./plots/classification.png')
     plt.show()
     
 
