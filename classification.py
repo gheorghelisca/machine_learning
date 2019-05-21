@@ -51,8 +51,9 @@ def train_model(training_data):
 
     # create a keras model
     model = Sequential()
-    model.add(Dense(16, input_shape=(2,), activation='relu'))
-    model.add(Dense(8, activation='relu'))
+    model.add(Dense(32, input_shape=(2,), activation='relu'))
+    model.add(Dense(32, activation='relu'))
+    model.add(Dense(32, activation='relu'))    
     model.add(Dense(1, activation='sigmoid'))
 
     model.compile(loss='binary_crossentropy', optimizer=Adam(lr=0.001), metrics = ['accuracy'])
