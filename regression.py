@@ -51,7 +51,7 @@ def train_model(training_data):
     model.add(Dense(32, activation='relu'))
     model.add(Dense(1,))
     
-    model.compile(optimizer=Adam(lr=0.001), loss='mean_squared_error', metrics=['acc'])
+    model.compile(optimizer=Adam(lr=0.001), loss='mean_squared_error', metrics=['mse', 'mae'])
 
 #    sgd = optimizers.SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
 #    model.compile(optimizer=sgd, loss='mean_squared_error', metrics=['acc'])
@@ -65,12 +65,19 @@ def evaluate_model(model, evaluation_data, groundtruth_data):
     '''TODO(lisca):
     '''
     evaluation = model.evaluate(evaluation_data, groundtruth_data)
-    print evaluation
+
+    mse = model.history.history['mean_squared_error']
+    mae = model.history.history['mean_absolute_error']
+
+    print mse
+    print mae
 
     predicted_data = model.predict(evaluation_data)
 
     # plot
     plt.plot(evaluation_data, groundtruth_data, 'bs', evaluation_data, predicted_data, 'rs')
+    plt.xlabel('Regression Results')
+    plt.savefig('./plots/regression.png')
     plt.show()
     
 
