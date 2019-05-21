@@ -3,7 +3,7 @@ import numpy as np
 
 from keras.models import Sequential
 from keras.layers import Dense
-from keras.optimizers import Adam
+from keras import optimizers
 
 import matplotlib.pyplot as plt
 
@@ -45,12 +45,16 @@ def train_model(training_data):
 
     # create a keras model
     model = Sequential()
-    model.add(Dense(16, input_shape=(1,), activation='relu'))
-    model.add(Dense(16, activation='relu'))
-    model.add(Dense(16, activation='relu'))
+    model.add(Dense(32, input_shape=(1,), activation='relu'))
+    model.add(Dense(32, activation='relu'))
+    model.add(Dense(32, activation='relu'))
+    model.add(Dense(32, activation='relu'))
     model.add(Dense(1,))
     
     model.compile(optimizer=Adam(lr=0.001), loss='mean_squared_error', metrics=['acc'])
+
+#    sgd = optimizers.SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
+#    model.compile(optimizer=sgd, loss='mean_squared_error', metrics=['acc'])
 
     model.fit(x_train, y_train, epochs=100)
 
