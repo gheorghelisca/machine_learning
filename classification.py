@@ -56,7 +56,7 @@ def train_model(training_data):
     model.add(Dense(32, activation='relu'))    
     model.add(Dense(1, activation='sigmoid'))
 
-    model.compile(loss='binary_crossentropy', optimizer=Adam(lr=0.001), metrics = ['accuracy'])
+    model.compile(loss='binary_crossentropy', optimizer=Adam(lr=0.001), metrics = ['acc'])
 
     # start training
     # model.fit((x_train, y_train, batch_size=32, epochs=100, validation_data=(X_val, Y_val))
@@ -71,10 +71,10 @@ def evaluate_model(model, evaluation_data, groundtruth_data):
     groundtruth_data = np.where(groundtruth_data==-1, 0, groundtruth_data)
 
     evaluation = model.evaluate(evaluation_data, groundtruth_data)
-    print evaluation
+    acc = model.history.history['acc']
+    print acc
 
     predicted_data = model.predict(evaluation_data)
-    print predicted_data
 
     # plot
     plt.plot(evaluation_data, groundtruth_data, 'bs', evaluation_data, predicted_data, 'rs')
